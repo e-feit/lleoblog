@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  db:
+    container_name: lleoblog-mysql
+    image: mysql:5.6
+    restart: always
+    command: --init-file /tmp/create-db.sql
+    environment:
+      MYSQL_ROOT_PASSWORD: "MySIC1234"
+      MYSQL_DATABASE: "blogs"
+      MYSQL_ROOT_HOST: "%"
+    volumes:
+      - /tmp/lleoblog-mysql:/var/lib/mysql
+      - ./docker:/tmp
+  backend:
+    build:
+      context: .
+    image: 'lleoblog:latest'
+    restart: always
+    container_name: lleoblog-apache
+    depends_on:
+      - db
+    ports:
+      - 80:80
