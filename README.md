@@ -2,53 +2,47 @@
 Full CMS for Diary or Site
 
 
-INSTALLATION
+## INSTALLATION
 
-1. BEFORE START
+### 1. BEFORE START
 
-    Download content in the root of site or folder, move config.sys.tmpl to config.sys and edit. The most important is MySQL setting:
+Download content in the root of site or folder, move `config.php.tmpl` to `config.php` and edit. The most important are MySQL settings:
+```
+$msq_host = "localhost";
+$msq_login = "root";
+$msq_pass = "MySIC1234";
+$msq_basa = "blogs";
+$msq_charset = "cp1251";
+```
 
-        $msq_host = "localhost";
-        $msq_login = "root";
-        $msq_pass = "MySIC1234";
-        $msq_basa = "blogs";
-        $msq_charset = "cp1251";
+If you install engine NOT IN THE ROOT of site (folder `blog/` for example):
+* set `$blogdir = "blog/";` in `config.php`
+* if you use apache: set `RewriteBase /dnevnik/` instead of `RewriteBase /` in `.htaccess`
 
-    If you install engine NOT IN THE ROOT of site (folder blog/ for example):
-    -- set $blogdir = "blog/"; in config.sys
-    -- if you use apache: set "RewriteBase /dnevnik/" instead "RewriteBase /" in .htaccess
+If you use nginx you have to:
+* disallow `hidden/` folder
+* redirect all unknown pages to `index.php`
+Example of `nginx.conf` below.
 
-    If you use nginx you have to:
-	-- disallow "hidden/" folder
-	-- redirect all unknown pages to index.php
-	Example of nginx.conf below.
+### 2. STARTING
 
-2. STARTING
+Try to open http://yoursite.com/install, reload the page and follow the instructions.
 
-    Try to open http://yoursite.com/install, reload the page and follow the instructions.
+### 3. AFTER INSTALLATION
 
-3. AFTER INSTALLATION
+WARNING!!! All visitors has the admin permissions!!!
 
-    WARNING!!! All visitors has the admin permissions!!!
-
-    You have to set admin:
-    -- Set $admin_unics="99999999"; (unknown unic) in config.sys
-    -- Reload http://yoursite.com/install, press "U" button or click the right-top icon for open you Personal Card, read your unic in header (number 1 for example)
-    -- Set $admin_unics="1"; in config.sys
-    -- Reload http://yoursite.com/install The yellow ball in left-top corner means admin. Click one for open admin' menu.
-
-
-
+You have to set admin:
+* Set `$admin_unics="99999999";` (unknown unic) in `config.php`
+* Reload http://yoursite.com/install, press "U" button or click the right-top icon for open you Personal Card, read your unic in header (number 1 for example)
+* Set `$admin_unics="1";` in `config.php`
+* Reload http://yoursite.com/install The yellow ball in left-top corner means admin. Click one for open admin' menu.
 
 
 
+If you use nginx, `nginx.conf` example below:
 
-
-
-
-If you use nginx, nginx.conf example below:
-
-
+```
 upstream home {
   server unix:/var/run/home-fpm.sock;
 }
@@ -96,3 +90,4 @@ server {
     }
   }
 }
+```

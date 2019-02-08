@@ -16,7 +16,7 @@ function installmod_init() {
 	$s=$q;
 	$hash=explode(" ","newhash_user hashinput hashlogin hashrss"); foreach($hash as $h) {
 	    if(preg_match("/(\n\s*[\$]".$h."\s*\=\s*[\'\"])([\'\"]\s*\;)/s",$q,$m)) {
-		$a["hash $h"]="OK creating hash \$".$h." in config.sys";
+		$a["hash $h"]="OK creating hash \$".$h." in config.php";
 		$q=str_replace($m[0],$m[1].hash_generate().$m[2],$q);
 	    }
 	}
@@ -45,13 +45,13 @@ function installmod_init() {
 
 	$a['unic system']=(!empty($GLOBALS['unic'])?"OK":"Blank login");
 
-	if(empty($GLOBALS['db_unic'])) $a['db_unic']="Set <b>\$db_unic=\"`unic`\";</b> in config.sys";
-	if(empty($GLOBALS['db_mailbox'])) $a['db_mailbox']="Set <b>\$db_mailbox=\"`mailbox`\";</b> in config.sys";
+	if(empty($GLOBALS['db_unic'])) $a['db_unic']="Set <b>\$db_unic=\"`unic`\";</b> in config.php";
+	if(empty($GLOBALS['db_mailbox'])) $a['db_mailbox']="Set <b>\$db_mailbox=\"`mailbox`\";</b> in config.php";
 
 	if(!empty($GLOBALS['admin_unics'])) $a['admin unics']="OK";
 	else {
 	    $a['admin unics']="Empty \$admin_unics "
-	    .(empty($GLOBALS['unic'])?"Continue installation...":"Set <b>\$admin_unics=\"".$GLOBALS['unic']."\";</b> in config.sys");
+	    .(empty($GLOBALS['unic'])?"Continue installation...":"Set <b>\$admin_unics=\"".$GLOBALS['unic']."\";</b> in config.php");
 	}
 
 	// хрнцх

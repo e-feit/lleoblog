@@ -82,12 +82,12 @@ $GLOBALS['ms_connected']=(function_exists('mysqli_connect') ?
 
 if(!function_exists('mysqli_connect')) {
     @mysqli_select_db($GLOBALS['msq_basa']) or die("<p>Good news: engine is working! Then, MySQL detected and connect successfull.
-<br>Bad news: MySQL BASE <b>`".$GLOBALS['msq_basa']."`</b> is not exist.<br>You have to define base name in config.sys: <b>\$msq_basa = '".$GLOBALS['msq_basa']."';</b>");
+<br>Bad news: MySQL BASE <b>`".$GLOBALS['msq_basa']."`</b> is not exist.<br>You have to define base name in config.php: <b>\$msq_basa = '".$GLOBALS['msq_basa']."';</b>");
 }
 
 if(function_exists('mysqli_connect')) {
 
-    // еще одна сраная йобаная заплатка
+    // пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     if(!function_exists('mysqli_fetch_all')) { function mysqli_fetch_all($sql) { for($res=array(); $tmp=mysqli_fetch_array($sql);) $res[]=$tmp; return $res; } }
 
    @mysqli_query($GLOBALS['ms_connected'],"SET NAMES ".$GLOBALS['msq_charset']);
@@ -107,7 +107,7 @@ if(function_exists('mysqli_connect')) {
 }
 
 
-// общее
+// пїЅпїЅпїЅпїЅпїЅ
 function msq_exist($tb,$u) { return ms("SELECT COUNT(*) FROM $tb $u","_l",0); }
 function msq_add($tb,$ara) { return msq("INSERT INTO $tb (`".implode('`,`',array_keys($ara))."`) VALUES ('".implode("','",array_values($ara))."')"); }
 function msq_update($tb,$ara,$u='') { $a=''; foreach($ara as $n=>$m) $a.="`$n`='$m',"; $a=trim($a,','); return msq("UPDATE $tb SET $a $u"); }

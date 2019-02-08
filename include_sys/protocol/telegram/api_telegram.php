@@ -1,6 +1,6 @@
 <?php
 
-// if(!isset($GLOBALS['telegram_API_key'])) die("\$telegram_API_key not defined in config.sys");
+// if(!isset($GLOBALS['telegram_API_key'])) die("\$telegram_API_key not defined in config.php");
 //define('BOT_TOKEN', $GLOBALS['telegram_API_key']);
 //define('API_URL', 'https://api.telegram.org/bot'.BOT_TOKEN.'/');
 // function tdie($s) { apiRequest("sendMessage", array('chat_id' => $GLOBALS['telegram_chat_id'], "text" => $s)); exit; }

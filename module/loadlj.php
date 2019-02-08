@@ -3,7 +3,7 @@
 if(!$admin) redirect($wwwhost."login/"); // посторонних - нахуй
 
 if(!isset($admin_ljuser)) idie("Ошибка: не указано имя пользователя livejournal!
-<br>Добавьте в свой config.sys эту строчку, пример: <b>\$admin_ljuser=\"lleo\";</b>");
+<br>Добавьте в свой config.php эту строчку, пример: <b>\$admin_ljuser=\"lleo\";</b>");
 
 DESIGN('plain',"Качаем журнал $admin_ljuser из кэша Яндекса");
 
