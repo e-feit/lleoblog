@@ -23,3 +23,5 @@ services:
       - db
     ports:
       - 80:80
+    environment:
+      - XDEBUG_CONFIG=remote_host=host.docker.internal
