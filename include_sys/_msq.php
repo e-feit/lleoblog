@@ -64,7 +64,7 @@ May be it is a temporarry problem? Try to reload page in several seconds or minu
     } else {
 
 	@mysql_select_db($GLOBALS['msq_basa']) or idie("<p>Good news: engine is working! Then, MySQL detected and connect successfull.
-<br>Bad news: MySQL BASE <b>`".$GLOBALS['msq_basa']."`</b> is not exist.<br>You have to define base name in config.sys: <b>\$msq_basa = '".$GLOBALS['msq_basa']."';</b>");
+<br>Bad news: MySQL BASE <b>`".$GLOBALS['msq_basa']."`</b> is not exist.<br>You have to define base name in config.php: <b>\$msq_basa = '".$GLOBALS['msq_basa']."';</b>");
 
 	@mysql_query("SET NAMES ".$GLOBALS['msq_charset']);
 	@mysql_query("SET @@local.character_set_client=".$GLOBALS['msq_charset']);
