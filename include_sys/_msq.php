@@ -1,4 +1,4 @@
-<?php //if(!function_exists('h')) die("Error 404"); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ - пїЅпїЅпїЅпїЅпїЅ
+<?php //if(!function_exists('h')) die("Error 404"); // неправильно запрошенный скрипт - нахуй
 
 $starttime=time();
 
@@ -12,7 +12,7 @@ function set_ttl() { global $admin,$ttl,$jaajax,$MYPAGE,$MYPAGE_MD5;
 } set_ttl();
 
 /*
-пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+ПОЛЕЗНЫЕ ПРИМЕРЫ
 
 include_once $_SERVER['DOCUMENT_ROOT']."/dnevnik/_msq.php"; msq_open('lleo');
 
@@ -35,8 +35,8 @@ msq_del($tb,$ara,$u='')
 */
 
 // if(!isset($memcache)) cache_init();
-$msqe=''; // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
-ms_connect(); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ - пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ _autorize.php
+$msqe=''; // сюда пишем ошибки
+ms_connect(); // соединиться с базой - эта процедура в _autorize.php
 
 function ms_connect() { if(isset($GLOBALS['ms_connected'])) return;
 
@@ -53,7 +53,7 @@ May be it is a temporarry problem? Try to reload page in several seconds or minu
 
     if(function_exists('mysqli_connect')) {
 
-	// пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	// еще одна сраная йобаная заплатка
 	if(!function_exists('mysqli_fetch_all')) { function mysqli_fetch_all($sql) { for($res=array(); $tmp=mysqli_fetch_array($sql);) $res[]=$tmp; return $res; } }
 
 	@mysqli_query($GLOBALS['ms_connected'],"SET NAMES ".$GLOBALS['msq_charset']);
@@ -64,7 +64,7 @@ May be it is a temporarry problem? Try to reload page in several seconds or minu
     } else {
 
 	@mysql_select_db($GLOBALS['msq_basa']) or idie("<p>Good news: engine is working! Then, MySQL detected and connect successfull.
-<br>Bad news: MySQL BASE <b>`".$GLOBALS['msq_basa']."`</b> is not exist.<br>You have to define base name in config.php: <b>\$msq_basa = '".$GLOBALS['msq_basa']."';</b>");
+<br>Bad news: MySQL BASE <b>`".$GLOBALS['msq_basa']."`</b> is not exist.<br>You have to define base name in config.sys: <b>\$msq_basa = '".$GLOBALS['msq_basa']."';</b>");
 
 	@mysql_query("SET NAMES ".$GLOBALS['msq_charset']);
 	@mysql_query("SET @@local.character_set_client=".$GLOBALS['msq_charset']);
@@ -136,18 +136,18 @@ $msqe .= "<p><font color=green>mysqli_query(\"$s\")</font><br><font color=red>$e
 	return($sql);
 }
 
-function msq_pole($tb,$pole) { // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ $tb
+function msq_pole($tb,$pole) { // проверить, существует ли такое поле в таблице $tb
 	if(!msq_table($tb)) return false;
         $pp=ms("SHOW COLUMNS FROM ".e($tb)."","_a",0); foreach($pp as $p) if($p['Field']==$pole) return $p['Type'];
 	return false;
 }
 
-function msq_table($table) { // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+function msq_table($table) { // проверить, существует ли такая таблица
         $ppp=ms("SHOW TABLES","_a",0); if($ppp!==false) foreach($ppp as $pp) if(sizeof($pp)) foreach($pp as $p) if($p==$table) return true;
         return false;
 }
 
-function msq_index($tb,$index) { // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ ,0 - пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ)
+function msq_index($tb,$index) { // проверить, существует ли такой индекс (если указан еще ,0 - то первичный)
 	if(!msq_table($tb)) return false;
         $pp=ms("SHOW INDEX FROM $tb","_a",0); if($pp!==false) foreach($pp as $p)
 //	if($p['Column_name']==$index && $p['Non_unique']=='1') return true; // [Seq_in_index] => 1
@@ -159,7 +159,7 @@ function msq_index($tb,$index) { // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ
 
 function ms($query,$mode='_a',$ttl=666) { $s = false; $magic='@'.$GLOBALS['blogdir']; if($ttl==666) $ttl=$GLOBALS['ttl'];
 
-	if($ttl < 0) { cache_rm($mode.$magic.$query); return true; } // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ
+	if($ttl < 0) { cache_rm($mode.$magic.$query); return true; } // сбросить кэш
 	elseif ($ttl > 0) {  $result=cache_get($mode.$magic.$query); if(false!==$result) {
 		$GLOBALS['ms_ttl']='cache';
 		return $result; }
@@ -195,7 +195,7 @@ function cache_get_raw($k) { global $memcache; if(!$memcache) return false; retu
 function cache_rm($k) { global $memcache; if(!$memcache) return false; $k=cache_md5($k); memcache_set($memcache,$k,false,0,1); return memcache_delete($memcache,$k); }
 function arae($ara){ $p=array(); foreach($ara as $n=>$l) $p[e($n)]=e($l); return $p; }
 
-// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+// утилиты работы с юзердатой
 function userdata_load($basa,$name) { return ms("SELECT `data` FROM `".get_dbuserdata()."` WHERE `basa`='".e($basa)."' AND `name`='".e($name)."'".ANDC(),"_l",0); }
 function userdata_save($basa,$name,$data) { return msq_add_update(get_dbuserdata(),array('data'=>e($data),'basa'=>e($basa),'name'=>e($name),'acn'=>intval($GLOBALS['acn'])),"basa name ANDC"); }
 function userdata_get($basa,$f=0,$l=99999) { return ms("SELECT `name`,`data` FROM `".get_dbuserdata()."` WHERE `basa`='".e($basa)."'".ANDC()." LIMIT ".intval($f).",".intval($l),"_a",0); }
