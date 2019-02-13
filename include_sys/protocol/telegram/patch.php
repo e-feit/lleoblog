@@ -82,7 +82,7 @@ $GLOBALS['ms_connected']=(function_exists('mysqli_connect') ?
 
 if(!function_exists('mysqli_connect')) {
     @mysqli_select_db($GLOBALS['msq_basa']) or die("<p>Good news: engine is working! Then, MySQL detected and connect successfull.
-<br>Bad news: MySQL BASE <b>`".$GLOBALS['msq_basa']."`</b> is not exist.<br>You have to define base name in config.sys: <b>\$msq_basa = '".$GLOBALS['msq_basa']."';</b>");
+<br>Bad news: MySQL BASE <b>`".$GLOBALS['msq_basa']."`</b> is not exist.<br>You have to define base name in config.php: <b>\$msq_basa = '".$GLOBALS['msq_basa']."';</b>");
 }
 
 if(function_exists('mysqli_connect')) {

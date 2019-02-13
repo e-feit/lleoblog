@@ -8,7 +8,7 @@ $BOT=(isset($_GET['bot'])?intval($_GET['bot']):0);
 
 ldie('DDD: '.$_SERVER['QUERY_STRING']); // $GLOBALS['telegram_API_key']);
 
-// if(!isset($GLOBALS['telegram_API_key'])) die("\$telegram_API_key not defined in config.sys");
+// if(!isset($GLOBALS['telegram_API_key'])) die("\$telegram_API_key not defined in config.php");
 if(!isset($GLOBALS['telegram_IP'])) tdie("BOT ERROR: set telegram IP in config.php: \$telegram_IP='149.154.167.204';");
 include_once "api_telegram.php";
 include("patch.php"); msq_connect();
